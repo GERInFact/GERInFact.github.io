@@ -18,20 +18,22 @@
   </head>
   <body>
     <!-- Header -->
-    <header class="header-container">
-      <div class="header-container_navigation">
-        <h1 class="navigation_title">jQuery - Pokémon Info Center</h1>
-        <div class="navigation_search">
-          <input type="text" class="search_bar" placeholder="search key" />
-          <button type="button" class="search_submit">Search</button>
+    <header>
+      <div class="container">
+        <div class="row">
+          <h1 class="col">jQuery - Pokémon Info Center</h1>
+        </div>
+        <div class="row">
+          <input type="text" class="search_bar col-sm-2" placeholder="search key" />
+          <button type="button" class="search_submit col-sm-2">Search</button>
         </div>
       </div>
     </header>
     <!-- Header End -->
 
     <!-- Main Content -->
-    <main class="main-content">
-      <ul class="main-content_pokemon-list">
+    <main class="container">
+      <ul class="main-content_pokemon-list row">
         <!-- Script Injection -->
         <!-- renderPokemonCards(pokemons) in scripts.js -->
         <!-- Script Injection End -->
