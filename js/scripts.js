@@ -150,7 +150,7 @@
     function renderPokemonCards() {
       loadList().then(() => {
         repository.forEach(p => {
-          addListItem(p);
+          addItemButton(p);
         });
       });
     }
@@ -243,25 +243,14 @@
       return isObject(item) && isObjectEqual(item, new Pokemon());
     }
 
-    // Function to add a pokemon entry
-    function addListItem(pokemon) {
-      if (!isPokemon(pokemon)) return;
-
-      $pokemonList.append(
-        `<li class="pokemon-list_item-${pokemon.name} col-sm-4 col-lg-2 my-2"></li>`
-      );
-      addItemButton(pokemon);
-    }
-
-    // Function to add an interactable button for the pokemon entry
+    // Function to add an intractable button for the pokemon entry
     function addItemButton(pokemon) {
-      var $listItem = $(`.pokemon-list_item-${pokemon.name}`);
-      $listItem.append(
-        `<button id="${pokemon.name}" class="btn btn-block btn-dark" data-toggle="modal" data-target="#exampleModal">${
+      $pokemonList.append(
+        `<button id="${pokemon.name}" class="list-group-item list-group-item-dark list-group-item-action" data-toggle="modal" data-target="#exampleModal">${
           pokemon.name
         }</button>`
       );
-      addItemButtonEvent(pokemon);
+      // addItemButtonEvent(pokemon);
     }
 
     // Function to add an action for the pokemon entry button
