@@ -248,7 +248,7 @@
       if (!isPokemon(pokemon)) return;
 
       $pokemonList.append(
-        `<li class="pokemon-list_item-${pokemon.name} col-sm-2"></li>`
+        `<li class="pokemon-list_item-${pokemon.name} col-sm-2 my-2"></li>`
       );
       addItemButton(pokemon);
     }
@@ -257,7 +257,7 @@
     function addItemButton(pokemon) {
       var $listItem = $(`.pokemon-list_item-${pokemon.name}`);
       $listItem.append(
-        `<button id="${pokemon.name}" class="item_button">${
+        `<button id="${pokemon.name}" class="btn btn-block btn-dark">${
           pokemon.name
         }</button>`
       );

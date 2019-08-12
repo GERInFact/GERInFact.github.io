@@ -19,12 +19,24 @@
   <body>
     <!-- Header -->
     <header>
+      <!-- Navigation -->
+      <nav class="navbar navbar-light bg-danger">
+        <a class="navbar-brand" href="#">PIC</a>
+      </nav>
+      <!-- Navigation End -->
+      
       <div class="container">
         <div class="row">
-          <h1 class="col">jQuery - Pokémon Info Center</h1>
+          <h1 class="col text-center display-3">
+            jQuery - Pokémon Info Center
+          </h1>
         </div>
         <div class="row">
-          <input type="text" class="search_bar col-sm-2" placeholder="search key" />
+          <input
+            type="text"
+            class="search_bar col-sm-2"
+            placeholder="search key"
+          />
           <button type="button" class="search_submit col-sm-2">Search</button>
         </div>
       </div>
@@ -33,7 +45,7 @@
 
     <!-- Main Content -->
     <main class="container">
-      <ul class="main-content_pokemon-list row">
+      <ul class="main-content_pokemon-list list-unstyled row">
         <!-- Script Injection -->
         <!-- renderPokemonCards(pokemons) in scripts.js -->
         <!-- Script Injection End -->
