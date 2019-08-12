@@ -34,72 +34,46 @@
   }
 
   var modalBox = (function() {
-    var $modalContainer = $("#modal-container");
-
-    // Function to hide pokemon details
-    function hide() {
-      $modalContainer.removeClass("is-visible");
-    }
+    var $modalLabel = $("#exampleModalLabel");
+    var $modalContent = $(".modal-body");
 
     // Function to display pokemon details
     function show(pokemon) {
-      if (!$modalContainer) return;
+      if (!$modalLabel || !$modalContent) return;
 
-      $modalContainer.empty();
-      $modalContainer.addClass("is-visible");
-      addModal();
-      var $modal = $(".modal");
-      setModalContent($modal, pokemon);
-    }
-
-    // Function to create modal box for pokemon details
-    function addModal() {
-      $modalContainer.append('<div class="modal"></div>');
+      $modalLabel.empty();
+      setModalContent(pokemon);
     }
 
     // Function to create modal box content
-    function setModalContent($modal, pokemon) {
-      if (!pokemon || !$modal) return;
+    function setModalContent(pokemon) {
+      if (!pokemon) return;
+      $modalContent.empty();
 
-      addHeader($modal, pokemon);
-      addImage($modal, pokemon.details);
-      addInfos($modal, pokemon.details);
-    }
-
-    // Function to create modal header
-    function addHeader($modal, pokemon) {
-      $modal.append('<div class="modal_header"></div>');
-      $modalHeader = $(".modal_header");
-      setCloseButton($modalHeader);
-      addTitle($modalHeader, pokemon);
-    }
-
-    // Function to create close button
-    function setCloseButton($modal) {
-      $modal.append('<button class="modal_close">Close</button>');
-      var $closeButton = $(".modal_close");
-      $closeButton.on("click", hide);
+      addTitle(pokemon);
+      addImage(pokemon.details);
+      addInfos(pokemon.details);
     }
 
     // Function to create modal box title
-    function addTitle($modal, pokemon) {
-      $modal.append(`<h2 class="modal_title">${pokemon.name}</h2>`);
+    function addTitle(pokemon) {
+      $modalLabel.text(pokemon.name);
     }
 
     // Function to get modal box image
-    function addImage($modal, pokemonDetails) {
-      $modal.append(
+    function addImage(pokemonDetails) {
+      $modalContent.append(
         `<img src="${
           pokemonDetails.sprites.front_default
         }" alt="The front view of ${
           pokemonDetails.species.name
-        }" class="modal_image">`
+        }" class="modal_image img-fluid">`
       );
     }
 
     // Function to get modal box info text
-    function addInfos($modal, pokemonDetails) {
-      $modal.append(`<div class="modal_text-container"></div>`);
+    function addInfos(pokemonDetails) {
+      $modalContent.append(`<div class="modal_text-container"></div>`);
 
       $textContainer = $(".modal_text-container");
 
@@ -119,25 +93,8 @@
       );
     }
 
-    // Function to close modal on ESCAPE pressed
-    window.addEventListener("keydown", e => {
-      if (e.key !== "Escape") return;
-
-      hide();
-    });
-
-    // Function to close modal, if clicked around it
-    $modalContainer.on("click", e => {
-      e.preventDefault();
-
-      if ($modalContainer[0] !== e.target) return;
-
-      hide();
-    });
-
     return {
-      show: show,
-      hide: hide
+      show: show
     };
   })();
 
@@ -192,7 +149,7 @@
       if (!filter || !$searchBar) return;
 
       var pokemonFound = getFiltered(filter).shift();
-      if (pokemonFound) showDetails(pokemonFound);
+      if (pokemonFound) $(`#${pokemonFound.name}`).click();
       else showNotFoundMessage($searchBar);
     }
 
@@ -200,9 +157,9 @@
     function showNotFoundMessage($searchBar) {
       if (!$searchBar) return;
 
-      $searchBar.parent().append(
-        "<p class='not-found-message'>Pokémon not found.<p>"
-      );
+      $searchBar
+        .parent()
+        .append("<p class='not-found-message'>Pokémon not found.<p>");
       setTimeout(() => {
         $(".not-found-message").remove();
       }, 1000);
@@ -246,11 +203,13 @@
     // Function to add an intractable button for the pokemon entry
     function addItemButton(pokemon) {
       $pokemonList.append(
-        `<button id="${pokemon.name}" class="list-group-item list-group-item-dark list-group-item-action" data-toggle="modal" data-target="#exampleModal">${
+        `<button id="${
+          pokemon.name
+        }" class="list-group-item list-group-item-dark list-group-item-action" data-toggle="modal" data-target="#exampleModal" role="listitem">${
           pokemon.name
         }</button>`
       );
-      // addItemButtonEvent(pokemon);
+      addItemButtonEvent(pokemon);
     }
 
     // Function to add an action for the pokemon entry button
