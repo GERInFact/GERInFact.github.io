@@ -1,10 +1,11 @@
+/* eslint-disable no-undef */
 (function() {
   // DOM Elements
-  var $pokemonList = $(".main-content_pokemon-list");
+  var $pokemonList = $('.main-content_pokemon-list');
 
   // Function to validate an item as object
   function isObject(item) {
-    return item !== null && item !== undefined && typeof item === "object";
+    return item !== null && item !== undefined && typeof item === 'object';
   }
 
   // Function to validate object equality
@@ -34,8 +35,8 @@
   }
 
   var modalBox = (function() {
-    var $modalLabel = $("#exampleModalLabel");
-    var $modalContent = $(".modal-body");
+    var $modalLabel = $('#exampleModalLabel');
+    var $modalContent = $('.modal-body');
 
     // Function to display pokemon details
     function show(pokemon) {
@@ -73,9 +74,9 @@
 
     // Function to get modal box info text
     function addInfos(pokemonDetails) {
-      $modalContent.append(`<div class="modal_text-container"></div>`);
+      $modalContent.append('<div class="modal_text-container"></div>');
 
-      $textContainer = $(".modal_text-container");
+      $textContainer = $('.modal_text-container');
 
       Object.keys(pokemonDetails).forEach(p => {
         if (!Array.isArray(pokemonDetails[p]) && !isObject(pokemonDetails[p])) {
@@ -101,7 +102,7 @@
   // List which contains all pokemons to display
   var pokemonRepository = (function() {
     var repository = [];
-    var apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=150";
+    var apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
     // Function to display pokemon entries
     function renderPokemonCards() {
@@ -114,7 +115,7 @@
 
     // Function to load pokemons from an external server
     function loadList() {
-      return $.ajax(apiUrl, { dataType: "json" })
+      return $.ajax(apiUrl, { dataType: 'json' })
         .then(res => {
           res.results.forEach(r => add(new Pokemon(r.name, r.url)));
           addSearchFunctionality();
@@ -124,12 +125,12 @@
 
     // Function to display searched pokemon details
     function addSearchFunctionality() {
-      var $searchBar = $(".search_bar");
-      var $searchSubmit = $(".search_submit");
+      var $searchBar = $('.search_bar');
+      var $searchSubmit = $('.search_submit');
       if (!($searchBar && $searchSubmit)) return;
 
       // Function to display found pokemon
-      $searchSubmit.on("click", e => {
+      $searchSubmit.on('click', e => {
         e.preventDefault();
         if (!$searchBar.val()) return;
 
@@ -137,7 +138,7 @@
       });
 
       // Function to display found pokemon
-      $searchBar.on("keydown", e => {
+      $searchBar.on('keydown', e => {
         if (e.keyCode !== 13) return;
 
         showFound(e.target.value, $searchBar);
@@ -159,9 +160,9 @@
 
       $searchBar
         .parent()
-        .append("<p class='not-found-message'>Pokémon not found.<p>");
+        .append('<p class=\'not-found-message\'>Pokémon not found.<p>');
       setTimeout(() => {
-        $(".not-found-message").remove();
+        $('.not-found-message').remove();
       }, 1000);
     }
 
@@ -215,7 +216,7 @@
     // Function to add an action for the pokemon entry button
     function addItemButtonEvent(pokemon) {
       var $itemButton = $(`#${pokemon.name}`);
-      $itemButton.on("click", e => {
+      $itemButton.on('click', e => {
         e.preventDefault();
         showDetails(pokemon);
       });
@@ -229,7 +230,7 @@
 
     // Function to load pokemon details form external server
     function loadDetails(pokemon) {
-      return $.ajax(pokemon.detailsUrl, { dataType: "json" })
+      return $.ajax(pokemon.detailsUrl, { dataType: 'json' })
         .then(res => {
           pokemon.details = JSON.parse(JSON.stringify(res));
         })
