@@ -257,7 +257,7 @@
     function addItemButton(pokemon) {
       var $listItem = $(`.pokemon-list_item-${pokemon.name}`);
       $listItem.append(
-        `<button id="${pokemon.name}" class="btn btn-block btn-dark">${
+        `<button id="${pokemon.name}" class="btn btn-block btn-dark" data-toggle="modal" data-target="#exampleModal">${
           pokemon.name
         }</button>`
       );
